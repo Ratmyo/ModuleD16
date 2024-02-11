@@ -1,6 +1,6 @@
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import *
-from .forms import ArticleForm
+from .forms import ArticleForm, ResponseForm
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.mixins import PermissionRequiredMixin
@@ -45,3 +45,9 @@ class ResponseList(PermissionRequiredMixin, ListView):
     def get_queryset(self):
         queryset = UserResponse.objects.filter(article__author=self.request.user)
         return queryset
+
+class ResponseCreate(PermissionRequiredMixin, CreateView):
+    permission_required = ('board.add_response',)
+    form_class = ResponseForm
+    model = UserResponse
+    template_name = 'responses_edit.html'

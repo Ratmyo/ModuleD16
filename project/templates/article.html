@@ -6,4 +6,22 @@ Article
 
 {% block content %}
 <h1>{{ article }}</h1>
+<hr>
+<table>
+    <tr>
+        <td>Содержание</td>
+        <td>Категория</td>
+        <td>Вложение</td>
+    </tr>
+    <tr>
+        <td>{{ article.text }}</td>
+        <td>{{ article.category }}</td>
+        {% if article.upload %}
+        <td><img src="{{ article.upload.url }}" width="200" height="200"</td>
+        {% endif %}
+    </tr>
+    {% if perms.board.add_response %}
+    <a href="{% url 'responses_create' %}">Оставить отклик</a>
+    {% endif %}
+</table>
 {% endblock content %}
