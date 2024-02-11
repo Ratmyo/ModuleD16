@@ -35,6 +35,7 @@ class ArticleUpdate(PermissionRequiredMixin, UpdateView):
 
 
 class ResponseList(PermissionRequiredMixin, ListView):
+    permission_required = ('board.detail_responses',)
     model = UserResponse
     ordering = 'article'
     template_name = 'responses.html'
@@ -42,5 +43,5 @@ class ResponseList(PermissionRequiredMixin, ListView):
     paginate_by = 10
 
     def get_queryset(self):
-        queryset = UserResponse.objects.filter(article__author=self.request.user) #проверить
+        queryset = UserResponse.objects.filter(article__author=self.request.user)
         return queryset

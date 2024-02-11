@@ -20,7 +20,7 @@ class Article(models.Model):
     title = models.CharField(max_length=64)
     text = models.TextField()
     category = models.CharField(max_length=12, choices=TYPE, null=False)
-    upload = models.FileField(upload_to='uploads/')
+    upload = models.FileField(upload_to='uploads/', blank=True)
 
     def __str__(self):
         return self.title
